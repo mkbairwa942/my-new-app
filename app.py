@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify, send_file
 from flask_cors import CORS
-import pyodbc
+#import pyodbc
+import mysql.connector
 import os
 from io import BytesIO
 
@@ -21,7 +22,7 @@ conn_str = f"""
     UID={username};
     PWD={password};
 """
-conn = pyodbc.connect(conn_str)
+conn = mysql.connector.connect(conn_str)
 cursor = conn.cursor()
 
 @app.route('/search', methods=['GET'])
@@ -44,6 +45,8 @@ if __name__ == '__main__':
     #app.run(debug=True)
     #app.run(host="0.0.0.0", port=5000, debug=True)
     app.run(host='0.0.0.0', port=5000)
+    #const response = await fetch(`http://192.168.1.59:5000/search?q=${query}`);
+
     #app.run(host="0.0.0.0", port=8080)
 
 
